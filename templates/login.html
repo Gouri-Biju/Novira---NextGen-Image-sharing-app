@@ -1,0 +1,89 @@
+{% include 'publicheader.html' %}
+<style>
+    body {
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .login-container {
+        background-color: rgba(0, 0, 0, 0.85);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        width: 350px;
+    }
+
+    .login-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #00ffff;
+        font-weight: bold;
+    }
+
+    .login-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #1c1c1c;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .login-container input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #00ffff;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .login-container input[type="submit"]:hover {
+        background-color: #00b3b3;
+    }
+</style>
+<br><br><br><br>
+<div class="content-wrapper">
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="uname">Username</label>
+            <input type="text" name="uname" id="uname" required>
+
+            <label for="pwd">Password</label>
+            <input type="password" name="pwd" id="pwd" required>
+
+            <input type="submit" name="submit" value="Login">
+        </form>
+    </div>
+</div>
+
+{% include 'footer.html' %}

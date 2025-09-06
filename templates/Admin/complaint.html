@@ -1,0 +1,110 @@
+{% include 'Admin/header.html' %}
+<style>
+    body {
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 60px 40px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00ffff;
+        margin-bottom: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(0, 0, 0, 0.75);
+        border: 1px solid #00ffff;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border: 1px solid #00ffff;
+        vertical-align: middle;
+    }
+
+    th {
+        background-color: #001f3f;
+        color: #00ffff;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    input[type="text"] {
+        padding: 6px 10px;
+        border: none;
+        border-radius: 6px;
+        background-color: #1c1c1c;
+        color: #fff;
+        width: 90%;
+    }
+
+    input[type="submit"] {
+        padding: 6px 12px;
+        background-color: #00ffff;
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        margin-top: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #00b3b3;
+    }
+</style>
+<br><br><br><br>
+<div class="container">
+    <h1>User Complaints</h1>
+    <table>
+        <tr>
+            <th>Sl.No</th>
+            <th>Photo</th>
+            <th>User</th>
+            <th>Complaint</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Reply</th>
+        </tr>
+        {% for c in u %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><img src="/static/media/{{ c.registration.photo }}" width="50" height="50" alt="User Photo"></td>
+            <td>{{ c.registration.fname }} {{ c.registration.lname }}</td>
+            <td>{{ c.complaint }}</td>
+            <td>{{ c.date }}</td>
+            <td>{{ c.status }}</td>
+            <td>
+                {% if c.reply == 'pending' %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ c.id }}">
+                    <input type="text" name="reply" placeholder="Enter your reply here">
+                    <input type="submit" name="submit" value="Send">
+                </form>
+                {% else %}
+                {{ c.reply }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% include 'footer.html' %}

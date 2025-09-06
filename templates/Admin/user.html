@@ -1,0 +1,78 @@
+{% include 'Admin/header.html' %}
+<style>
+    body {
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 60px 40px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00ffff;
+        margin-bottom: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(0, 0, 0, 0.75);
+        border: 1px solid #00ffff;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border: 1px solid #00ffff;
+    }
+
+    th {
+        background-color: #001f3f;
+        color: #00ffff;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    img {
+        border-radius: 50%;
+        border: 2px solid #00ffff;
+    }
+</style>
+<br><br><br><br>
+<div class="container">
+    <h1>Registered Users</h1>
+    <table>
+        <tr>
+            <th>Sl.No</th>
+            <th>Photo</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        {% for user in u %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><img src="/static/media/{{ user.photo }}" width="50" height="50" alt="User Photo"></td>
+            <td>{{ user.user.username }}</td>
+            <td>{{ user.fname }}</td>
+            <td>{{ user.lname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% include 'footer.html' %}
