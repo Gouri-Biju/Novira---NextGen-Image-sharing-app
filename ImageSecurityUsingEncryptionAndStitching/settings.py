@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,16 +78,10 @@ WSGI_APPLICATION = 'ImageSecurityUsingEncryptionAndStitching.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'imagesecurityusingencryptionandstitching',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT':'3306'
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -127,6 +123,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR,'static/']
 MEDIA_URL = '/media/'
 MEDIA_ROOT =os.path.join(BASE_DIR, 'static/media')
+	
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   # new folder for deployment
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
