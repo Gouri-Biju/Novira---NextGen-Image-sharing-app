@@ -7,7 +7,6 @@ import 'package:imagesecurity/viewfriendrequests.dart';
 import 'package:imagesecurity/viewfriends.dart';
 import 'package:imagesecurity/viewusers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 void main() {
   runApp(const HomeApp());
 }

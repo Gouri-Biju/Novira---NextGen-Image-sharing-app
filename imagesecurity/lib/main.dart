@@ -87,7 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () async {
                       SharedPreferences sh = await SharedPreferences.getInstance();
                       String? url = _ipcontroller.text;
-                      await sh.setString('url', 'http://$url');
+                      await sh.setString('url', url.toString());
+                      print(url);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const LogApp()),

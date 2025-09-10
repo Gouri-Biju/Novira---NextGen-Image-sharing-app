@@ -77,9 +77,12 @@ WSGI_APPLICATION = 'ImageSecurityUsingEncryptionAndStitching.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+import dj_database_url
+import os
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+        default="postgresql://postgres:Gouri%401902@db.kwqkgdftdjmemhkcarjz.supabase.co:5432/postgres"
     )
 }
 
